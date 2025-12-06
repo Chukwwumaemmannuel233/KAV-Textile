@@ -20,10 +20,10 @@ export default function SiteHeader({ variant = "guest" }: SiteHeaderProps) {
               <Link href="/pages/user/fabrics" className="text-sm font-medium hover:opacity-70 transition">
                 Shop
               </Link>
-              <Link href="/collections" className="text-sm font-medium hover:opacity-70 transition">
+              <Link href="/pages/user/about" className="text-sm font-medium hover:opacity-70 transition">
                 About
               </Link>
-              <Link href="/pages/user/about" className="text-sm font-medium hover:opacity-70 transition">
+              <Link href="/pages/user/contact" className="text-sm font-medium hover:opacity-70 transition">
                 Contact
               </Link>
             </nav>
@@ -84,13 +84,13 @@ export default function SiteHeader({ variant = "guest" }: SiteHeaderProps) {
             FABRIC.
           </Link>
           <nav className="hidden md:flex gap-8 items-center">
-            <Link href="/shop" className="text-sm font-medium hover:opacity-70 transition">
+            <Link href="/pages/Guest/shop" className="text-sm font-medium hover:opacity-70 transition">
               Shop
             </Link>
-            <Link href="/story" className="text-sm font-medium hover:opacity-70 transition">
+            <Link href="/pages/Guest/story" className="text-sm font-medium hover:opacity-70 transition">
               Our Story
             </Link>
-            <Link href="/journal" className="text-sm font-medium hover:opacity-70 transition">
+            <Link href="/pages/Guest/journal" className="text-sm font-medium hover:opacity-70 transition">
               Journal
             </Link>
           </nav>
