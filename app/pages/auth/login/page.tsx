@@ -19,7 +19,7 @@ export default function LoginPage() {
     console.log("Login attempt:", { email, password });
 
     // ✅ Redirect after login
-    router.push("/pages/user/product");
+    router.push("/pages/user/fabrics");
   };
 
   return (
