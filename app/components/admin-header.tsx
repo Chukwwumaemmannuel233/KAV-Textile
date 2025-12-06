@@ -18,7 +18,7 @@ export default function AdminHeader() {
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           {/* Logo */}
           <Link href="/pages/admin/dashboard" className="text-2xl font-bold tracking-tight hover:opacity-70 transition">
-            FABRICO
+            FABRIC
           </Link>
 
           {/* Navigation Links - Hidden on mobile */}

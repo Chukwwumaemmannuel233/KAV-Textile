@@ -3,11 +3,11 @@
 import type React from "react";
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation"; // ✅ ADD THIS
+import { useRouter } from "next/navigation";   // ✅ ADD THIS
 import { Eye, EyeOff } from "lucide-react";
 
 export default function LoginPage() {
-  const router = useRouter(); // ✅ INITIALIZE ROUTER
+  const router = useRouter();   // ✅ INITIALIZE ROUTER
 
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
@@ -19,7 +19,7 @@ export default function LoginPage() {
     console.log("Login attempt:", { email, password });
 
     // ✅ Redirect after login
-    router.push("/pages/user/product");
+    router.push("/pages/admin/dashboard");  
   };
 
   return (
@@ -83,19 +83,9 @@ export default function LoginPage() {
           >
             Login
           </button>
-
-          <div className="mt-2">
-            <button
-              type="button"
-              onClick={() => router.push("/pages/auth/admin-login")}
-              className="w-full border border-black text-black font-semibold py-3 rounded-lg hover:bg-neutral-200 transition"
-            >
-              Admin Login
-            </button>
-          </div>
         </form>
 
-        <div className="text-center mt-8">
+        {/* <div className="text-center mt-8">
           <span className="text-neutral-400 text-sm">
             New to our site?{" "}
             <Link
@@ -105,7 +95,7 @@ export default function LoginPage() {
               Sign Up
             </Link>
           </span>
-        </div>
+        </div> */}
       </div>
     </div>
   );
