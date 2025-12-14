@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-
+import { Button } from "../../../components/ui/button"
 import { useState } from "react"
 import SiteHeader from "../../../components/site-header"
 
@@ -20,6 +20,8 @@ export default function AccountDetailsPage() {
 
   const [profileEdited, setProfileEdited] = useState(false)
   const [passwordErrors, setPasswordErrors] = useState<string>("")
+  const [isSavingProfile, setIsSavingProfile] = useState(false)
+  const [isUpdatingPassword, setIsUpdatingPassword] = useState(false)
 
   const handleProfileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -38,12 +40,15 @@ export default function AccountDetailsPage() {
     }))
   }
 
-  const handleSaveProfile = () => {
-    // Profile save logic here
+  const handleSaveProfile = async () => {
+    setIsSavingProfile(true)
+    // Simulate API call
+    await new Promise((resolve) => setTimeout(resolve, 1000))
     setProfileEdited(false)
+    setIsSavingProfile(false)
   }
 
-  const handleUpdatePassword = () => {
+  const handleUpdatePassword = async () => {
     setPasswordErrors("")
 
     if (!passwordData.currentPassword || !passwordData.newPassword || !passwordData.confirmPassword) {
@@ -61,12 +66,15 @@ export default function AccountDetailsPage() {
       return
     }
 
-    // Password update logic here
+    setIsUpdatingPassword(true)
+    // Simulate API call
+    await new Promise((resolve) => setTimeout(resolve, 1000))
     setPasswordData({
       currentPassword: "",
       newPassword: "",
       confirmPassword: "",
     })
+    setIsUpdatingPassword(false)
   }
 
   return (
@@ -84,7 +92,7 @@ export default function AccountDetailsPage() {
             <h2 className="text-2xl font-bold">Profile Information</h2>
             <div className="flex gap-3">
               {profileEdited && (
-                <button
+                <Button
                   onClick={() => {
                     setProfileData({
                       firstName: "Jessica",
@@ -96,14 +104,16 @@ export default function AccountDetailsPage() {
                   className="px-4 py-2 bg-neutral-300 text-neutral-900 font-medium rounded hover:bg-neutral-400 transition"
                 >
                   Cancel
-                </button>
+                </Button>
               )}
-              <button
+              <Button
                 onClick={handleSaveProfile}
+                isLoading={isSavingProfile}
+                loadingText="Saving..."
                 className="px-6 py-2 bg-orange-600 text-white font-medium rounded hover:bg-orange-700 transition"
               >
                 Save Changes
-              </button>
+              </Button>
             </div>
           </div>
 
@@ -192,12 +202,14 @@ export default function AccountDetailsPage() {
               />
             </div>
 
-            <button
+            <Button
               onClick={handleUpdatePassword}
+              isLoading={isUpdatingPassword}
+              loadingText="Updating..."
               className="px-6 py-2 bg-orange-600 text-white font-medium rounded hover:bg-orange-700 transition w-fit"
             >
               Update Password
-            </button>
+            </Button>
           </div>
         </div>
       </div>

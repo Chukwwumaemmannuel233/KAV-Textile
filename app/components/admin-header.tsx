@@ -70,13 +70,13 @@ export default function AdminHeader() {
             <Link href="/pages/admin/settings" className="hover:opacity-70 transition">
               <Settings size={20} />
             </Link>
-            <button className="hover:opacity-70 transition relative">
+            <Link href="/pages/admin/notification" className="hover:opacity-70 transition relative">
               <Bell size={20} />
               {/* Notification badge */}
-              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+              {/* <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
                 3
-              </span>
-            </button>
+              </span> */}
+            </Link>
             <Link href="/pages/admin/profile" className="hover:opacity-70 transition">
               <div className="w-8 h-8 rounded-full bg-neutral-300 flex items-center justify-center">
                 <User size={16} />

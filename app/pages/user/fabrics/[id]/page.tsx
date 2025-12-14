@@ -1,8 +1,10 @@
-"use client"
+"use client";
 
-import { use, useState } from "react"
-import Link from "next/link"
-import { ChevronDown } from "lucide-react"
+import { use, useState } from "react";
+import Link from "next/link";
+import { ChevronDown } from "lucide-react";
+import { useCart } from "@/lib/cart-context";
+import { Button } from "../../../../components/ui/button";
 
 const allProducts: Record<number, any> = {
   1: {
@@ -19,7 +21,8 @@ const allProducts: Record<number, any> = {
       origin: "Woven in Belgium",
     },
     care: "Machine wash cold with similar colors. Tumble dry low or line dry. Iron on medium heat if desired.",
-    shipping: "Orders ship within 5-7 business days. Free shipping on orders over $100. Easy 30-day returns.",
+    shipping:
+      "Orders ship within 5-7 business days. Free shipping on orders over $100. Easy 30-day returns.",
     images: [
       "/belgian-linen-fabric.jpg",
       "/natural-fibers-linen-cotton.jpg",
@@ -32,7 +35,8 @@ const allProducts: Record<number, any> = {
     name: "ORGANIC BRUSHED COTTON",
     category: "Cotton",
     price: 18.0,
-    description: "Soft and breathable organic cotton with a brushed finish for ultimate comfort and sustainability.",
+    description:
+      "Soft and breathable organic cotton with a brushed finish for ultimate comfort and sustainability.",
     specifications: {
       width: "60 inches (152 cm)",
       weight: "6.5 oz/sq yd (220 GSM)",
@@ -40,7 +44,8 @@ const allProducts: Record<number, any> = {
       origin: "Grown and woven in India",
     },
     care: "Wash in warm water with similar colors. Tumble dry medium. Can be ironed on medium heat.",
-    shipping: "Orders ship within 5-7 business days. Free shipping on orders over $100. Easy 30-day returns.",
+    shipping:
+      "Orders ship within 5-7 business days. Free shipping on orders over $100. Easy 30-day returns.",
     images: [
       "/organic-brushed-cotton-fabric.jpg",
       "/natural-fibers-linen-cotton.jpg",
@@ -53,7 +58,8 @@ const allProducts: Record<number, any> = {
     name: "SILK CHARMEUSE",
     category: "Silk",
     price: 45.0,
-    description: "Luxurious silk charmeuse with a smooth satin finish, perfect for draping and elegant designs.",
+    description:
+      "Luxurious silk charmeuse with a smooth satin finish, perfect for draping and elegant designs.",
     specifications: {
       width: "52 inches (132 cm)",
       weight: "12 oz/sq yd (400 GSM)",
@@ -61,7 +67,8 @@ const allProducts: Record<number, any> = {
       origin: "Woven in Lyon, France",
     },
     care: "Dry clean recommended. Hand wash cold if needed. Never tumble dry.",
-    shipping: "Orders ship within 5-7 business days. Free shipping on orders over $100. Easy 30-day returns.",
+    shipping:
+      "Orders ship within 5-7 business days. Free shipping on orders over $100. Easy 30-day returns.",
     images: [
       "/silk-charmeuse-fabric.jpg",
       "/natural-fibers-linen-cotton.jpg",
@@ -74,7 +81,8 @@ const allProducts: Record<number, any> = {
     name: "RAW DENIM",
     category: "Denim",
     price: 22.0,
-    description: "Classic raw denim with rich indigo color that develops unique fading patterns with wear.",
+    description:
+      "Classic raw denim with rich indigo color that develops unique fading patterns with wear.",
     specifications: {
       width: "58 inches (147 cm)",
       weight: "13 oz/sq yd (440 GSM)",
@@ -82,7 +90,8 @@ const allProducts: Record<number, any> = {
       origin: "Woven in Japan",
     },
     care: "Wash rarely to maintain color. When washing, use cold water and turn inside out. Air dry preferred.",
-    shipping: "Orders ship within 5-7 business days. Free shipping on orders over $100. Easy 30-day returns.",
+    shipping:
+      "Orders ship within 5-7 business days. Free shipping on orders over $100. Easy 30-day returns.",
     images: [
       "/raw-denim-fabric.jpg",
       "/natural-fibers-linen-cotton.jpg",
@@ -95,7 +104,8 @@ const allProducts: Record<number, any> = {
     name: "MERINO WOOL JERSEY",
     category: "Wool",
     price: 30.0,
-    description: "Fine merino wool jersey blend offering warmth, breathability, and natural temperature regulation.",
+    description:
+      "Fine merino wool jersey blend offering warmth, breathability, and natural temperature regulation.",
     specifications: {
       width: "56 inches (142 cm)",
       weight: "8.5 oz/sq yd (290 GSM)",
@@ -103,7 +113,8 @@ const allProducts: Record<number, any> = {
       origin: "Spun in New Zealand",
     },
     care: "Wash in cold water with wool-specific detergent. Lay flat to dry. Do not tumble dry.",
-    shipping: "Orders ship within 5-7 business days. Free shipping on orders over $100. Easy 30-day returns.",
+    shipping:
+      "Orders ship within 5-7 business days. Free shipping on orders over $100. Easy 30-day returns.",
     images: [
       "/merino-wool-jersey-fabric.jpg",
       "/natural-fibers-linen-cotton.jpg",
@@ -116,7 +127,8 @@ const allProducts: Record<number, any> = {
     name: "TENCEL TWILL",
     category: "Tencel",
     price: 28.0,
-    description: "Eco-friendly Tencel fabric with a twill weave, offering durability and a smooth drape.",
+    description:
+      "Eco-friendly Tencel fabric with a twill weave, offering durability and a smooth drape.",
     specifications: {
       width: "60 inches (152 cm)",
       weight: "7 oz/sq yd (237 GSM)",
@@ -124,7 +136,8 @@ const allProducts: Record<number, any> = {
       origin: "Woven in Austria",
     },
     care: "Machine wash warm with similar colors. Tumble dry on low. Iron on low to medium heat if needed.",
-    shipping: "Orders ship within 5-7 business days. Free shipping on orders over $100. Easy 30-day returns.",
+    shipping:
+      "Orders ship within 5-7 business days. Free shipping on orders over $100. Easy 30-day returns.",
     images: [
       "/tencel-twill-fabric.jpg",
       "/natural-fibers-linen-cotton.jpg",
@@ -137,7 +150,8 @@ const allProducts: Record<number, any> = {
     name: "HEMP CANVAS",
     category: "Hemp",
     price: 20.0,
-    description: "Sustainable hemp canvas with natural texture and durability. Perfect for heavy-duty applications.",
+    description:
+      "Sustainable hemp canvas with natural texture and durability. Perfect for heavy-duty applications.",
     specifications: {
       width: "54 inches (137 cm)",
       weight: "11 oz/sq yd (372 GSM)",
@@ -145,7 +159,8 @@ const allProducts: Record<number, any> = {
       origin: "Woven in France",
     },
     care: "Machine wash cold. Tumble dry low or air dry. Canvas will soften with washing.",
-    shipping: "Orders ship within 5-7 business days. Free shipping on orders over $100. Easy 30-day returns.",
+    shipping:
+      "Orders ship within 5-7 business days. Free shipping on orders over $100. Easy 30-day returns.",
     images: [
       "/hemp-canvas-fabric.jpg",
       "/natural-fibers-linen-cotton.jpg",
@@ -158,7 +173,8 @@ const allProducts: Record<number, any> = {
     name: "BAMBOO VELOUR",
     category: "Bamboo",
     price: 26.0,
-    description: "Luxurious bamboo velour with soft pile surface, incredibly smooth and gentle on skin.",
+    description:
+      "Luxurious bamboo velour with soft pile surface, incredibly smooth and gentle on skin.",
     specifications: {
       width: "58 inches (147 cm)",
       weight: "10 oz/sq yd (338 GSM)",
@@ -166,7 +182,8 @@ const allProducts: Record<number, any> = {
       origin: "Processed in China",
     },
     care: "Wash in cold water with gentle detergent. Lay flat to dry to maintain pile quality.",
-    shipping: "Orders ship within 5-7 business days. Free shipping on orders over $100. Easy 30-day returns.",
+    shipping:
+      "Orders ship within 5-7 business days. Free shipping on orders over $100. Easy 30-day returns.",
     images: [
       "/bamboo-velour-fabric.jpg",
       "/natural-fibers-linen-cotton.jpg",
@@ -179,7 +196,8 @@ const allProducts: Record<number, any> = {
     name: "LINEN BLEND - SAGE",
     category: "Linen",
     price: 24.0,
-    description: "Sophisticated sage-colored linen blend with added durability and reduced wrinkle appearance.",
+    description:
+      "Sophisticated sage-colored linen blend with added durability and reduced wrinkle appearance.",
     specifications: {
       width: "55 inches (140 cm)",
       weight: "6 oz/sq yd (203 GSM)",
@@ -187,7 +205,8 @@ const allProducts: Record<number, any> = {
       origin: "Woven in Ireland",
     },
     care: "Machine wash cold. Tumble dry low or air dry. Light ironing recommended.",
-    shipping: "Orders ship within 5-7 business days. Free shipping on orders over $100. Easy 30-day returns.",
+    shipping:
+      "Orders ship within 5-7 business days. Free shipping on orders over $100. Easy 30-day returns.",
     images: [
       "/sage-linen-blend-fabric.jpg",
       "/natural-fibers-linen-cotton.jpg",
@@ -200,7 +219,8 @@ const allProducts: Record<number, any> = {
     name: "COTTON SATEEN - CREAM",
     category: "Cotton",
     price: 19.0,
-    description: "Elegant cream cotton sateen with a lustrous finish, ideal for formal applications.",
+    description:
+      "Elegant cream cotton sateen with a lustrous finish, ideal for formal applications.",
     specifications: {
       width: "60 inches (152 cm)",
       weight: "7.5 oz/sq yd (254 GSM)",
@@ -208,7 +228,8 @@ const allProducts: Record<number, any> = {
       origin: "Woven in Italy",
     },
     care: "Machine wash warm. Tumble dry medium. Press with medium heat while slightly damp for best finish.",
-    shipping: "Orders ship within 5-7 business days. Free shipping on orders over $100. Easy 30-day returns.",
+    shipping:
+      "Orders ship within 5-7 business days. Free shipping on orders over $100. Easy 30-day returns.",
     images: [
       "/cream-cotton-sateen-fabric.jpg",
       "/natural-fibers-linen-cotton.jpg",
@@ -221,7 +242,8 @@ const allProducts: Record<number, any> = {
     name: "SILK DUPIONI - ROSE",
     category: "Silk",
     price: 42.0,
-    description: "Beautiful rose-hued silk dupioni with subtle texture and natural slubs for sophisticated elegance.",
+    description:
+      "Beautiful rose-hued silk dupioni with subtle texture and natural slubs for sophisticated elegance.",
     specifications: {
       width: "51 inches (130 cm)",
       weight: "14 oz/sq yd (475 GSM)",
@@ -229,7 +251,8 @@ const allProducts: Record<number, any> = {
       origin: "Hand-woven in India",
     },
     care: "Dry clean recommended. Protect from direct sunlight to prevent color fading.",
-    shipping: "Orders ship within 5-7 business days. Free shipping on orders over $100. Easy 30-day returns.",
+    shipping:
+      "Orders ship within 5-7 business days. Free shipping on orders over $100. Easy 30-day returns.",
     images: [
       "/silk-dupioni-rose-fabric.jpg",
       "/natural-fibers-linen-cotton.jpg",
@@ -242,7 +265,8 @@ const allProducts: Record<number, any> = {
     name: "WOOL FELT - CHARCOAL",
     category: "Wool",
     price: 32.0,
-    description: "Dense charcoal wool felt with excellent structural integrity and natural water resistance.",
+    description:
+      "Dense charcoal wool felt with excellent structural integrity and natural water resistance.",
     specifications: {
       width: "54 inches (137 cm)",
       weight: "16 oz/sq yd (542 GSM)",
@@ -250,7 +274,8 @@ const allProducts: Record<number, any> = {
       origin: "Milled in Germany",
     },
     care: "Spot clean recommended. Dry clean for full cleaning. Do not machine wash.",
-    shipping: "Orders ship within 5-7 business days. Free shipping on orders over $100. Easy 30-day returns.",
+    shipping:
+      "Orders ship within 5-7 business days. Free shipping on orders over $100. Easy 30-day returns.",
     images: [
       "/charcoal-wool-felt-fabric.jpg",
       "/natural-fibers-linen-cotton.jpg",
@@ -258,43 +283,75 @@ const allProducts: Record<number, any> = {
       "/fabric-weaving-texture.jpg",
     ],
   },
-}
+};
 
-export default function ProductPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = use(params)
+export default function ProductPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = use(params);
+  const [isAdding, setIsAddIng] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+  const [expandedSections, setExpandedSections] = useState<string[]>([
+    "specifications",
+  ]);
+  const { addToCart } = useCart();
 
-  const [quantity, setQuantity] = useState(1)
-  const [expandedSections, setExpandedSections] = useState<string[]>(["specifications"])
-
-  const productId = Number.parseInt(id)
-  const product = allProducts[productId]
+  const productId = Number.parseInt(id);
+  const product = allProducts[productId];
 
   if (!product) {
     return (
       <main className="bg-white min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4">Product Not Found</h1>
-          <Link href="/pages/user/fabrics" className="text-blue-600 hover:underline">
+          <Link
+            href="/pages/user/fabrics"
+            className="text-blue-600 hover:underline"
+          >
             Back to Fabrics
           </Link>
         </div>
       </main>
-    )
+    );
   }
 
   const toggleSection = (section: string) => {
-    setExpandedSections((prev) => (prev.includes(section) ? prev.filter((s) => s !== section) : [...prev, section]))
-  }
+    setExpandedSections((prev) =>
+      prev.includes(section)
+        ? prev.filter((s) => s !== section)
+        : [...prev, section]
+    );
+  };
 
-  const handleAddToCart = () => {
-    console.log(`Added ${quantity} yard(s) of ${product.name} to cart`)
-  }
+  const handleAddToCart = async () => {
+    setIsAddIng(true); // Start loading
+
+    // Simulate processing delay
+    await new Promise((resolve) => setTimeout(resolve, 800));
+
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      quantity: quantity,
+      image: product.images[0],
+      color: product.category,
+      sku: `TX-${String(product.id).padStart(5, "0")}`,
+    });
+
+    console.log(`Added ${quantity} yard(s) of ${product.name} to cart`);
+
+    setQuantity(1);
+    setIsAddIng(false); // Stop loading
+  };
 
   return (
     <main className="bg-white min-h-screen">
       <div className="px-6 md:px-16 py-6 border-b border-neutral-200">
         <nav className="text-sm text-neutral-600">
-          <Link href="/" className="hover:text-neutral-900">
+          <Link href="/pages/user/dashboard" className="hover:text-neutral-900">
             Home
           </Link>
           {" / "}
@@ -322,19 +379,31 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                   key={idx}
                   className="border-2 border-neutral-300 rounded-lg overflow-hidden hover:border-neutral-900 transition"
                 >
-                  <img src={img || "/placeholder.svg"} alt={`View ${idx + 1}`} className="w-full h-20 object-cover" />
+                  <img
+                    src={img || "/placeholder.svg"}
+                    alt={`View ${idx + 1}`}
+                    className="w-full h-20 object-cover"
+                  />
                 </button>
               ))}
             </div>
           </div>
 
           <div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">{product.name}</h1>
-            <p className="text-2xl font-semibold mb-6 text-neutral-900">${product.price.toFixed(2)} / yard</p>
-            <p className="text-neutral-700 leading-relaxed mb-8">{product.description}</p>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              {product.name}
+            </h1>
+            <p className="text-2xl font-semibold mb-6 text-neutral-900">
+              ${product.price.toFixed(2)} / yard
+            </p>
+            <p className="text-neutral-700 leading-relaxed mb-8">
+              {product.description}
+            </p>
 
             <div className="mb-8">
-              <label className="block text-sm font-medium mb-4">Quantity:</label>
+              <label className="block text-sm font-medium mb-4">
+                Quantity:
+              </label>
               <div className="flex items-center gap-4">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
@@ -352,12 +421,14 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
               </div>
             </div>
 
-            <button
+            <Button
               onClick={handleAddToCart}
+              isLoading={isAdding}
+              loadingText="Adding..."
               className="w-full bg-black text-white py-4 rounded-full font-semibold text-lg hover:bg-neutral-900 transition mb-8"
             >
               ADD TO CART
-            </button>
+            </Button>
 
             <div className="border-t border-neutral-200 pt-8 space-y-6">
               <div>
@@ -368,7 +439,11 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                   Specifications
                   <ChevronDown
                     size={20}
-                    className={`transition-transform ${expandedSections.includes("specifications") ? "rotate-180" : ""}`}
+                    className={`transition-transform ${
+                      expandedSections.includes("specifications")
+                        ? "rotate-180"
+                        : ""
+                    }`}
                   />
                 </button>
                 {expandedSections.includes("specifications") && (
@@ -401,11 +476,15 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                   Care Instructions
                   <ChevronDown
                     size={20}
-                    className={`transition-transform ${expandedSections.includes("care") ? "rotate-180" : ""}`}
+                    className={`transition-transform ${
+                      expandedSections.includes("care") ? "rotate-180" : ""
+                    }`}
                   />
                 </button>
                 {expandedSections.includes("care") && (
-                  <div className="pb-6 text-neutral-700 leading-relaxed">{product.care}</div>
+                  <div className="pb-6 text-neutral-700 leading-relaxed">
+                    {product.care}
+                  </div>
                 )}
               </div>
 
@@ -417,11 +496,15 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                   Shipping & Returns
                   <ChevronDown
                     size={20}
-                    className={`transition-transform ${expandedSections.includes("shipping") ? "rotate-180" : ""}`}
+                    className={`transition-transform ${
+                      expandedSections.includes("shipping") ? "rotate-180" : ""
+                    }`}
                   />
                 </button>
                 {expandedSections.includes("shipping") && (
-                  <div className="pb-6 text-neutral-700 leading-relaxed">{product.shipping}</div>
+                  <div className="pb-6 text-neutral-700 leading-relaxed">
+                    {product.shipping}
+                  </div>
                 )}
               </div>
             </div>
@@ -434,13 +517,18 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
             <div>
               <h3 className="font-semibold mb-4">FABRIC.</h3>
-              <p className="text-sm text-neutral-700">The finest textiles, curated for the modern creator.</p>
+              <p className="text-sm text-neutral-700">
+                The finest textiles, curated for the modern creator.
+              </p>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Shop</h4>
               <ul className="space-y-2 text-sm text-neutral-700">
                 <li>
-                  <Link href="/pages/user/fabrics" className="hover:text-neutral-900">
+                  <Link
+                    href="/pages/user/fabrics"
+                    className="hover:text-neutral-900"
+                  >
                     All Fabrics
                   </Link>
                 </li>
@@ -470,7 +558,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                   </Link>
                 </li>
                 <li>
-                  <Link href="faq" className="hover:text-neutral-900">
+                  <Link href="#" className="hover:text-neutral-900">
                     FAQ
                   </Link>
                 </li>
@@ -506,5 +594,5 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
         </div>
       </footer>
     </main>
-  )
+  );
 }

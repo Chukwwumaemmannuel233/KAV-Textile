@@ -3,6 +3,7 @@
 import type React from "react";
 import { useState } from "react";
 import Link from "next/link";
+import { Button } from "../../../components/ui/button";
 import { useRouter } from "next/navigation"; // ✅ ADD THIS
 import { Eye, EyeOff } from "lucide-react";
 
@@ -12,15 +13,20 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLogginIn, setIsLogginIn] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    console.log("Login attempt:", { email, password });
-
-    // ✅ Redirect after login
-    router.push("/pages/user/fabrics");
-  };
+ const handleSubmit = async (e: React.FormEvent) => {
+     e.preventDefault();
+     setIsLogginIn(true);
+ 
+     // Simulate processing
+     await new Promise((resolve) => setTimeout(resolve, 800));
+ 
+     console.log("Login attempt:", { email, password });
+ 
+     // Redirect after login
+     router.push("/pages/user/dashboard");
+   };
 
   return (
     <div className="min-h-screen bg-neutral-100 flex items-center justify-center px-4 py-8">
@@ -77,12 +83,14 @@ export default function LoginPage() {
             </Link>
           </div>
 
-          <button
+          <Button
             type="submit"
+            isLoading={isLogginIn}
+            loadingText="Logging in..."
             className="w-full bg-black text-white font-semibold py-3 rounded-lg hover:bg-black/80 transition"
           >
             Login
-          </button>
+          </Button>
 
           <div className="mt-2">
             <button

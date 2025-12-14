@@ -1,9 +1,26 @@
-"use client"
-import SiteHeader from "../../../components/site-header"
-import Link from "next/link"
-import { Shield, Hammer, Star } from "lucide-react"
+"use client";
+import { useState } from "react";
+import SiteHeader from "../../../components/site-header";
+import Link from "next/link";
+import { Shield, Hammer, Star } from "lucide-react";
+import { Button } from "../../../components/ui/button";
+import { useRouter } from "next/navigation"; // ✅ ADD THIS
 
 export default function AboutPage() {
+  const [isExplore, setIsExplore] = useState(false);
+  const router = useRouter(); // ✅ INITIALIZE ROUTER
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsExplore(true);
+
+    // Simulate processing
+    await new Promise((resolve) => setTimeout(resolve, 800));
+
+    // Redirect after login
+    router.push("/pages/user/fabrics");
+  };
+
   return (
     <main className="bg-white">
       {/* Header */}
@@ -12,9 +29,12 @@ export default function AboutPage() {
       {/* Hero Section */}
       <section className="w-full flex items-center justify-center px-6 md:px-16 py-16 md:py-24">
         <div className="max-w-5xl w-full bg-neutral-500 rounded-lg py-24 md:py-32 text-center">
-          <h1 className="text-5xl font-bold text-white mb-4">Woven with Purpose</h1>
+          <h1 className="text-5xl font-bold text-white mb-4">
+            Woven with Purpose
+          </h1>
           <p className="text-lg text-neutral-100">
-            Discover the story behind our threads, crafted with passion and integrity.
+            Discover the story behind our threads, crafted with passion and
+            integrity.
           </p>
         </div>
       </section>
@@ -26,12 +46,14 @@ export default function AboutPage() {
           <div>
             <h2 className="text-4xl font-bold mb-6">Our Story</h2>
             <p className="text-neutral-700 mb-4 leading-relaxed">
-              Founded on a passion for authentic materials, our journey began with a commitment to quality and
-              traditional techniques. We traverse the globe to source the finest natural fibers, connecting the hands of
-              our artisans with discerning creators like you.
+              Founded on a passion for authentic materials, our journey began
+              with a commitment to quality and traditional techniques. We
+              traverse the globe to source the finest natural fibers, connecting
+              the hands of our artisans with discerning creators like you.
             </p>
             <p className="text-neutral-700 leading-relaxed">
-              Our story is woven with sustainability, ensuring timeless beauty of handcrafted fabrics.
+              Our story is woven with sustainability, ensuring timeless beauty
+              of handcrafted fabrics.
             </p>
           </div>
           {/* Image */}
@@ -48,7 +70,9 @@ export default function AboutPage() {
       {/* Our Core Values Section */}
       <section className="px-6 md:px-16 py-16 md:py-24 bg-neutral-50">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16">Our Core Values</h2>
+          <h2 className="text-4xl font-bold text-center mb-16">
+            Our Core Values
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {/* Value 1 */}
             <div className="text-center">
@@ -57,7 +81,8 @@ export default function AboutPage() {
               </div>
               <h3 className="text-xl font-bold mb-3">Sustainability</h3>
               <p className="text-neutral-600">
-                We source natural, eco-friendly materials and fibers to protect our shared planet.
+                We source natural, eco-friendly materials and fibers to protect
+                our shared planet.
               </p>
             </div>
             {/* Value 2 */}
@@ -66,7 +91,10 @@ export default function AboutPage() {
                 <Hammer size={48} className="text-neutral-800" />
               </div>
               <h3 className="text-xl font-bold mb-3">Artisanal Craft</h3>
-              <p className="text-neutral-600">We honor traditional techniques, preserving heritage in every thread.</p>
+              <p className="text-neutral-600">
+                We honor traditional techniques, preserving heritage in every
+                thread.
+              </p>
             </div>
             {/* Value 3 */}
             <div className="text-center">
@@ -75,7 +103,8 @@ export default function AboutPage() {
               </div>
               <h3 className="text-xl font-bold mb-3">Uncompromising Quality</h3>
               <p className="text-neutral-600">
-                Our commitment ensures the most durable, reliable, and exquisite fabrics.
+                Our commitment ensures the most durable, reliable, and exquisite
+                fabrics.
               </p>
             </div>
           </div>
@@ -87,15 +116,21 @@ export default function AboutPage() {
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           {/* Image */}
           <div className="w-full h-96 bg-neutral-300 rounded-lg overflow-hidden">
-            <img src="/images/jane-doe-ceo-portrait.jpg" alt="Jane Doe CEO" className="w-full h-full object-cover" />
+            <img
+              src="/images/jane-doe-ceo-portrait.jpg"
+              alt="Jane Doe CEO"
+              className="w-full h-full object-cover"
+            />
           </div>
           {/* Content */}
           <div>
             <h3 className="text-3xl font-bold mb-2">Jane Doe</h3>
             <p className="text-neutral-600 font-medium mb-6">CEO & Founder</p>
             <p className="text-neutral-700 leading-relaxed">
-              With a lifelong passion for textiles, Jane founded the company to bring sustainable, high-quality fabrics
-              to the forefront of design. Her vision is to connect ethical sourcing with uncompromising beauty.
+              With a lifelong passion for textiles, Jane founded the company to
+              bring sustainable, high-quality fabrics to the forefront of
+              design. Her vision is to connect ethical sourcing with
+              uncompromising beauty.
             </p>
           </div>
         </div>
@@ -107,16 +142,23 @@ export default function AboutPage() {
           {/* Content */}
           <div>
             <h3 className="text-3xl font-bold mb-2">John Smith</h3>
-            <p className="text-neutral-600 font-medium mb-6">COO & Head of Operations</p>
+            <p className="text-neutral-600 font-medium mb-6">
+              COO & Head of Operations
+            </p>
             <p className="text-neutral-700 leading-relaxed">
-              John ensures that our operations align with our core values, from sourcing ethical materials to perfecting
-              our supply chain. His dedication to transparency and quality drives excellence throughout our
-              organization.
+              John ensures that our operations align with our core values, from
+              sourcing ethical materials to perfecting our supply chain. His
+              dedication to transparency and quality drives excellence
+              throughout our organization.
             </p>
           </div>
           {/* Image */}
           <div className="w-full h-96 bg-neutral-300 rounded-lg overflow-hidden">
-            <img src="/images/john-smith-coo-portrait.jpg" alt="John Smith COO" className="w-full h-full object-cover" />
+            <img
+              src="/images/john-smith-coo-portrait.jpg"
+              alt="John Smith COO"
+              className="w-full h-full object-cover"
+            />
           </div>
         </div>
       </section>
@@ -126,15 +168,19 @@ export default function AboutPage() {
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-4xl font-bold mb-6">Our Mission</h2>
           <p className="text-neutral-700 leading-relaxed mb-10">
-            Our mission is to create textiles that not only beautify spaces but also tell a story of conscious
-            craftsmanship. We are dedicated to quality, heritage, and sustainability, while respecting the planet and
-            the hands that craft our fabrics.
+            Our mission is to create textiles that not only beautify spaces but
+            also tell a story of conscious craftsmanship. We are dedicated to
+            quality, heritage, and sustainability, while respecting the planet
+            and the hands that craft our fabrics.
           </p>
-          <Link href="/pages/user/fabrics">
-            <button className="bg-black text-white px-8 py-3 font-medium hover:bg-neutral-900 transition">
-              Explore Our Collection
-            </button>
-          </Link>
+          <Button
+            onClick={handleSubmit}
+            isLoading={isExplore}
+            loadingText="Loading..."
+            className="bg-black text-white px-8 py-3 font-medium hover:bg-neutral-900 transition"
+          >
+            Explore Our Collection
+          </Button>
         </div>
       </section>
 
@@ -152,9 +198,11 @@ export default function AboutPage() {
               Contact Us
             </a>
           </div>
-          <p className="text-sm text-neutral-600">© 2025 TEXTILE. All rights reserved.</p>
+          <p className="text-sm text-neutral-600">
+            © 2025 TEXTILE. All rights reserved.
+          </p>
         </div>
       </footer>
     </main>
-  )
+  );
 }

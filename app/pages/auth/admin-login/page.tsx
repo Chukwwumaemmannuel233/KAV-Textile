@@ -2,31 +2,37 @@
 
 import type React from "react";
 import { useState } from "react";
+import { Button } from "../../../components/ui/button";
 import Link from "next/link";
-import { useRouter } from "next/navigation";   // ✅ ADD THIS
+import { useRouter } from "next/navigation"; // ✅ ADD THIS
 import { Eye, EyeOff } from "lucide-react";
 
 export default function LoginPage() {
-  const router = useRouter();   // ✅ INITIALIZE ROUTER
+  const router = useRouter(); // ✅ INITIALIZE ROUTER
 
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLogginIn, setIsLogginIn] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLogginIn(true);
+
+    // Simulate processing
+    await new Promise((resolve) => setTimeout(resolve, 800));
 
     console.log("Login attempt:", { email, password });
 
-    // ✅ Redirect after login
-    router.push("/pages/admin/dashboard");  
+    // Redirect after login
+    router.push("/pages/admin/dashboard");
   };
 
   return (
     <div className="min-h-screen bg-neutral-100 flex items-center justify-center px-4 py-8">
       <div className="w-full max-w-md p-8 md:p-10 bg-white shadow-md rounded-2xl">
         <h1 className="text-2xl font-bold text-center mb-6 tracking-tight">
-          Log In
+          Admin Log In
         </h1>
 
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -77,12 +83,14 @@ export default function LoginPage() {
             </Link>
           </div>
 
-          <button
+          <Button
             type="submit"
+            isLoading={isLogginIn}
+            loadingText="Logging in..."
             className="w-full bg-black text-white font-semibold py-3 rounded-lg hover:bg-black/80 transition"
           >
             Login
-          </button>
+          </Button>
         </form>
 
         {/* <div className="text-center mt-8">

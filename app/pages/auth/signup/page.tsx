@@ -1,12 +1,32 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { Eye, EyeOff } from "lucide-react"
+import { useState } from "react";
+import Link from "next/link";
+import { Eye, EyeOff } from "lucide-react";
+import { Button } from "../../../components/ui/button";
+import { useRouter } from "next/navigation"; // ✅ ADD THIS
 
 export default function SignUpPage() {
-  const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const router = useRouter(); // ✅ INITIALIZE ROUTER
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSignUp(true);
+
+    // Simulate processing
+    await new Promise((resolve) => setTimeout(resolve, 800));
+
+    console.log("Login attempt:", { name, email, password });
+
+    // Redirect after login
+    router.push("/pages/user/dashboard");
+  };
 
   return (
     <div className="min-h-screen bg-neutral-100 flex items-center justify-center p-4">
@@ -16,7 +36,7 @@ export default function SignUpPage() {
           Create Account
         </h1>
 
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={handleSubmit}>
           {/* Name Field */}
           <div>
             <label htmlFor="name" className="block text-sm font-medium mb-1">
@@ -45,7 +65,10 @@ export default function SignUpPage() {
 
           {/* Password Field */}
           <div>
-            <label htmlFor="password" className="block text-sm font-medium mb-1">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium mb-1"
+            >
               Password
             </label>
             <div className="relative">
@@ -67,7 +90,10 @@ export default function SignUpPage() {
 
           {/* Confirm Password Field */}
           <div>
-            <label htmlFor="confirmPassword" className="block text-sm font-medium mb-1">
+            <label
+              htmlFor="confirmPassword"
+              className="block text-sm font-medium mb-1"
+            >
               Confirm Password
             </label>
             <div className="relative">
@@ -88,22 +114,27 @@ export default function SignUpPage() {
           </div>
 
           {/* Sign Up Button */}
-          <button
+          <Button
             type="submit"
+            isLoading={isSignUp}
+            loadingText="Signing Up..."
             className="w-full bg-black text-white py-3 rounded-lg text-sm font-medium hover:bg-neutral-800 transition mt-4"
           >
             Sign Up
-          </button>
+          </Button>
 
           {/* Login Link */}
           <p className="text-center text-sm text-neutral-600 mt-4">
             Already have an account?{" "}
-            <Link href="/pages/login" className="text-black font-semibold hover:opacity-70">
+            <Link
+              href="/pages/login"
+              className="text-black font-semibold hover:opacity-70"
+            >
               Log In
             </Link>
           </p>
         </form>
       </div>
     </div>
-  )
+  );
 }

@@ -1,16 +1,25 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
+import { Button } from "./components/ui/button";
 import { ChevronDown } from "lucide-react";
 import SiteHeader from "./components/site-header";
 
 export default function Home() {
+  const [isNavigating, setIsNavigating] = useState(false);
+
+  const handleSummit = async () => {
+    setIsNavigating(true);
+    // Simulate processing
+    await new Promise((resolve) => setTimeout(resolve, 800));
+    window.location.href = "/pages/auth/login";
+  };
   return (
     <main className="bg-white overflow-hidden">
       {/* Header */}
       <SiteHeader />
 
-      {/* Hero Section */}
       {/* Hero Section */}
       <section className="relative flex flex-col lg:flex-row pt-12 pb-20 overflow-hidden">
         {/* Left Content */}
@@ -27,11 +36,14 @@ export default function Home() {
             here.
           </p>
 
-          <Link href="/pages/auth/login">
-            <button className="bg-black text-white px-8 py-3 font-medium hover:bg-neutral-900 transition">
-              Discover the Collection
-            </button>
-          </Link>
+          <Button
+            onClick={handleSummit}
+            isLoading={isNavigating}
+            loadingText="Loading..."
+            className="bg-black text-white  w-60 py-3 font-medium hover:bg-neutral-900 transition"
+          >
+            Discover the Collection
+          </Button>
         </div>
 
         {/* Right Image */}

@@ -1,11 +1,12 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import Link from "next/link"
-import SiteHeader from "../../../components/site-header"
-import { Instagram, Github, Facebook } from "lucide-react"
+import { useState } from "react";
+import Link from "next/link";
+import SiteHeader from "../../../components/site-header";
+import { Instagram, Facebook, Twitter } from "lucide-react";
+import { Button } from "../../../components/ui/button";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -13,20 +14,28 @@ export default function ContactPage() {
     email: "",
     subject: "",
     message: "",
-  })
+  });
+  const [isContact, setIsContact] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-    })
-  }
+    });
+  };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Form submitted:", formData)
-    setFormData({ fullName: "", email: "", subject: "", message: "" })
-  }
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsContact(true);
+
+    await new Promise((resolve) => setTimeout(resolve, 800));
+    console.log("Form submitted:", formData);
+    setFormData({ fullName: "", email: "", subject: "", message: "" });
+
+     setIsContact(false);
+  };
 
   return (
     <main className="min-h-screen bg-white">
@@ -40,54 +49,83 @@ export default function ContactPage() {
             {/* Left Column - Contact Info */}
             <div className="space-y-12">
               <div>
-                <h1 className="text-4xl md:text-5xl font-bold mb-6">Get in Touch</h1>
+                <h1 className="text-4xl md:text-5xl font-bold mb-6">
+                  Get in Touch
+                </h1>
                 <p className="text-neutral-600 text-base leading-relaxed">
-                  We'd love to hear from you. Reach out with any questions, inquiries, or just to say hello.
+                  We'd love to hear from you. Reach out with any questions,
+                  inquiries, or just to say hello.
                 </p>
               </div>
 
               {/* Email */}
               <div>
-                <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-2">Email</p>
-                <a href="mailto:support@textileco.com" className="text-lg text-neutral-900 hover:opacity-70 transition">
+                <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-2">
+                  Email
+                </p>
+                <a
+                  href="mailto:support@textileco.com"
+                  className="text-lg text-neutral-900 hover:opacity-70 transition"
+                >
                   support@textileco.com
                 </a>
               </div>
 
               {/* Phone */}
               <div>
-                <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-2">Phone</p>
-                <a href="tel:+12345678900" className="text-lg text-neutral-900 hover:opacity-70 transition">
+                <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-2">
+                  Phone
+                </p>
+                <a
+                  href="tel:+12345678900"
+                  className="text-lg text-neutral-900 hover:opacity-70 transition"
+                >
                   +1 (234) 567-8900
                 </a>
               </div>
 
               {/* Address */}
               <div>
-                <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-2">Address</p>
-                <p className="text-lg text-neutral-900">123 Fabric Lane, Suite 100, Weavertown, TX 54321</p>
+                <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-2">
+                  Address
+                </p>
+                <p className="text-lg text-neutral-900">
+                  123 Fabric Lane, Suite 100, Weavertown, TX 54321
+                </p>
               </div>
 
               {/* Business Hours */}
               <div>
-                <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-2">Business Hours</p>
-                <p className="text-lg text-neutral-900">Monday - Friday, 9:00 AM - 5:00 PM EST</p>
+                <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-2">
+                  Business Hours
+                </p>
+                <p className="text-lg text-neutral-900">
+                  Monday - Friday, 9:00 AM - 5:00 PM EST
+                </p>
               </div>
 
               {/* Social Media */}
               <div>
-                <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-4">Follow Us</p>
+                <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-4">
+                  Follow Us
+                </p>
                 <div className="flex gap-3">
-                  <a href="#" className="bg-pink-100 text-pink-600 p-3 rounded-lg hover:bg-pink-200 transition">
+                  <a
+                    href="#"
+                    className="bg-pink-100 text-pink-600 p-3 rounded-lg hover:bg-pink-200 transition"
+                  >
                     <Instagram size={20} />
                   </a>
                   <a
                     href="#"
                     className="bg-neutral-200 text-neutral-700 p-3 rounded-lg hover:bg-neutral-300 transition"
                   >
-                    <Github size={20} />
+                    <Twitter size={20} />
                   </a>
-                  <a href="#" className="bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 transition">
+                  <a
+                    href="#"
+                    className="bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 transition"
+                  >
                     <Facebook size={20} />
                   </a>
                 </div>
@@ -101,7 +139,9 @@ export default function ContactPage() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Full Name */}
                 <div>
-                  <label className="block text-sm font-medium text-neutral-900 mb-2">Full Name</label>
+                  <label className="block text-sm font-medium text-neutral-900 mb-2">
+                    Full Name
+                  </label>
                   <input
                     type="text"
                     name="fullName"
@@ -114,7 +154,9 @@ export default function ContactPage() {
 
                 {/* Email */}
                 <div>
-                  <label className="block text-sm font-medium text-neutral-900 mb-2">Email Address</label>
+                  <label className="block text-sm font-medium text-neutral-900 mb-2">
+                    Email Address
+                  </label>
                   <input
                     type="email"
                     name="email"
@@ -127,7 +169,9 @@ export default function ContactPage() {
 
                 {/* Subject */}
                 <div>
-                  <label className="block text-sm font-medium text-neutral-900 mb-2">Subject</label>
+                  <label className="block text-sm font-medium text-neutral-900 mb-2">
+                    Subject
+                  </label>
                   <input
                     type="text"
                     name="subject"
@@ -140,7 +184,9 @@ export default function ContactPage() {
 
                 {/* Message */}
                 <div>
-                  <label className="block text-sm font-medium text-neutral-900 mb-2">Your Message</label>
+                  <label className="block text-sm font-medium text-neutral-900 mb-2">
+                    Your Message
+                  </label>
                   <textarea
                     name="message"
                     value={formData.message}
@@ -152,12 +198,14 @@ export default function ContactPage() {
                 </div>
 
                 {/* Submit Button */}
-                <button
+                <Button
                   type="submit"
+                  isLoading={isContact}
+                  loadingText="Contacting..."
                   className="w-full bg-black text-white font-medium py-3 rounded-lg hover:bg-neutral-900 transition"
                 >
                   Send Message
-                </button>
+                </Button>
               </form>
             </div>
           </div>
@@ -168,15 +216,26 @@ export default function ContactPage() {
       <footer className="border-t border-neutral-200 bg-white">
         <div className="max-w-5xl mx-auto px-6 md:px-16 py-12">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <p className="text-sm text-neutral-600">© 2025 Textile Co. All rights reserved.</p>
+            <p className="text-sm text-neutral-600">
+              © 2025 Textile Co. All rights reserved.
+            </p>
             <div className="flex gap-6">
-              <Link href="/faq" className="text-sm text-neutral-600 hover:text-neutral-900 transition">
+              <Link
+                href="/faq"
+                className="text-sm text-neutral-600 hover:text-neutral-900 transition"
+              >
                 FAQs
               </Link>
-              <Link href="/pages/user/shipping-returns" className="text-sm text-neutral-600 hover:text-neutral-900 transition">
+              <Link
+                href="/pages/user/shipping-returns"
+                className="text-sm text-neutral-600 hover:text-neutral-900 transition"
+              >
                 Shipping & Returns
               </Link>
-              <Link href="/privacy" className="text-sm text-neutral-600 hover:text-neutral-900 transition">
+              <Link
+                href="/privacy"
+                className="text-sm text-neutral-600 hover:text-neutral-900 transition"
+              >
                 Privacy Policy
               </Link>
             </div>
@@ -184,5 +243,5 @@ export default function ContactPage() {
         </div>
       </footer>
     </main>
-  )
+  );
 }
