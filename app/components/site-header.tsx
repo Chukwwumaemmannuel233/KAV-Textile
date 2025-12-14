@@ -19,7 +19,7 @@ export default function SiteHeader({ variant = "guest" }: SiteHeaderProps) {
       <>
         <header className="border-b border-neutral-200 sticky top-0 z-40 bg-white">
           <div className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
-            <Link href="/" className="text-2xl font-bold tracking-tight hover:opacity-70 transition">
+            <Link href="/pages/user/dashboard" className="text-2xl font-bold tracking-tight hover:opacity-70 transition">
               FABRIC.
             </Link>
             <nav className="hidden md:flex gap-8 items-center">
