@@ -104,7 +104,7 @@ export default function SiteHeader({ variant = "guest" }: SiteHeaderProps) {
         <nav className="md:hidden fixed bottom-0 left-0 right-0 border-t border-neutral-200 bg-white z-40">
           <div className="flex items-center justify-around">
             <Link
-              href="/"
+              href="/Pages/user/dashboard"
               className="flex-1 py-3 flex flex-col items-center gap-1 text-xs font-medium hover:opacity-70 transition"
             >
               <Home size={20} />
