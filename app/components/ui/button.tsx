@@ -2,7 +2,7 @@
 
 import type * as React from "react"
 
-interface ButtonProps extends React.ComponentProps<"button"> {
+export interface ButtonProps extends React.ComponentProps<"button"> {
   variant?: "default" | "outline" | "ghost" | "destructive" | "unstyled"
   isLoading?: boolean
   loadingText?: string
